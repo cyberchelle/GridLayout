@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bored</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-lg my-5">
+        <div class="row justify-content-center">
+        </div>
+        <div class="col-sm-4 col-lg-6">
+            <div class="p-5 bg-primary text-light"><h2 class="activity"></h2></div>
+        </div>
+        <div class="col-sm-4 col-lg-3">
+            <div class="p-5 bg-primary text-light"><h2 class="type"></h2></div>
+        </div>
+    </div>
+
+    <script>
+        request = new XMLHttpRequest()
+        request.open("GET","https://www.boredapi.com/api/activity")
+        request.send()
+
+        request.onload = function(){
+            if (request.status == 200){
+                data =JSON.parse(request.responseText)
+                console.log(data)
+                document.querySelector(".activity").innerHTML = "Activity: " + data.activity
+                document.querySelector(".type").innerHTML = "Type: " + data.type
+            }else if (request.status== 404){
+                console.log("No records Found")
+            }
+        }
+    </script>
+</body>
+</html>
